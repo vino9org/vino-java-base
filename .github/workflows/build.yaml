@@ -12,7 +12,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -35,12 +34,16 @@ jobs:
           GITHUB_USER: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-# TODO: cleanup older snapshots
-#      - name: Delete old packages
-#        uses: actions/delete-package-versions@v4
-#        with:
-#          owner: vino9org
-#          package-name: net.vino9.vino.vino-baselib
-#          package-type: maven
-#          min-versions-to-keep: 5
-#          token: ${{ secrets.GITHUB_TOKEN }}
+  cleanup:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        param: [vino-base-pom, vino-bom, vino-baselib, vino-svc-parent]
+    steps:
+        uses: actions/delete-package-versions@v4
+        with:
+          owner: vino9org
+          package-name: ${{ matrix.param }}
+          package-type: maven
+          min-versions-to-keep: 5
+          token: ${{ secrets.GITHUB_TOKEN }}
