@@ -39,16 +39,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        param:
-          - net.vino9.vino.vino-base-pom
-          - net.vino9.vino.vino-bom
-          - net.vino9.vino.vino-baselib
-          - net.vino9.vino.vino-svc-parent
+        param: [vino-base-pom, vino-bom, vino-baselib, vino-svc-parent]
     steps:
       - uses: actions/delete-package-versions@v4
         with:
           owner: vino9org
-          package-name: ${{ matrix.param }}
+          package-name: net.vino9.vino.${{ matrix.param }}
           package-type: maven
           min-versions-to-keep: 5
           token: ${{ secrets.GITHUB_TOKEN }}
