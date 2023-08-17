@@ -40,10 +40,10 @@ jobs:
       matrix:
         param: [vino-base-pom, vino-bom, vino-baselib, vino-svc-parent]
     steps:
-        uses: actions/delete-package-versions@v4
-        with:
-          owner: vino9org
-          package-name: ${{ matrix.param }}
-          package-type: maven
-          min-versions-to-keep: 5
-          token: ${{ secrets.GITHUB_TOKEN }}
+      uses: actions/delete-package-versions@v4
+      with:
+        owner: vino9org
+        package-name: ${{ matrix.param }}
+        package-type: maven
+        min-versions-to-keep: 5
+        token: ${{ secrets.GITHUB_TOKEN }}
