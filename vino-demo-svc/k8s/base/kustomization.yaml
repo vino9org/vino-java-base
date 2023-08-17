@@ -1,0 +1,4 @@
+resources:
+- vino-demo-svc.yaml
+
+# DELETE_IF: cookiecutter.gen_k8s_yaml != 'yes'
