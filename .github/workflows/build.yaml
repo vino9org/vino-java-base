@@ -35,10 +35,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   cleanup:
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        param: [vino-base-pom, vino-bom, vino-baselib, vino-svc-parent]
+        param:
+          - net.vino9.vino.vino-base-pom
+          - net.vino9.vino.vino-bom
+          - net.vino9.vino.vino-baselib
+          - net.vino9.vino.vino-svc-parent
     steps:
       - uses: actions/delete-package-versions@v4
         with:
