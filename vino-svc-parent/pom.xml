@@ -12,7 +12,7 @@
 
     <groupId>net.vino9.vino</groupId>
     <artifactId>vino-svc-parent</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -39,7 +39,7 @@
             <dependency>
                 <groupId>net.vino9.vino</groupId>
                 <artifactId>vino-bom</artifactId>
-                <version>1.0.6</version>
+                <version>1.0.7-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

@@ -6,14 +6,14 @@
     <parent>
         <groupId>net.vino9.vino</groupId>
         <artifactId>vino-svc-parent</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7-SNAPSHOT</version>
         <relativePath>../vino-svc-parent</relativePath>
     </parent>
 
     <!-- do not remove groupId -->
     <groupId>net.vino9.vino</groupId>
     <artifactId>vino-demo-svc</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7-SNAPSHOT</version>
     <name>vino-demo-svc</name>
     <description>Demo microservice for testing base POM</description>
 
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>net.vino9.vino</groupId>
             <artifactId>vino-baselib</artifactId>
-            <version>1.0.6</version>
+            <version>1.0.7-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
