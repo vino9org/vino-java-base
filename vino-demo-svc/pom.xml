@@ -170,47 +170,22 @@
                 <artifactId>graphqlcodegen-maven-plugin</artifactId>
             </plugin>
             <!-- CC: {%- endif -%} -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+            </plugin>
             <!-- CC: {%- if 'archunit' in cookiecutter.qa_tools -%} -->
             <plugin>
                 <groupId>com.societegenerale.commons</groupId>
                 <artifactId>arch-unit-maven-plugin</artifactId>
             </plugin>
             <!-- CC: {%- endif -%} -->
+            <!-- CC: {%- if 'jqassistant' in cookiecutter.qa_tools -%} -->
             <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
+                <groupId>com.buschmais.jqassistant</groupId>
+                <artifactId>jqassistant-maven-plugin</artifactId>
             </plugin>
+            <!-- CC: {%- endif -%} -->
         </plugins>
     </build>
-    <profiles>
-        <!-- CC: {%- if 'jqassistant' in cookiecutter.qa_tools -%} -->
-        <profile>
-            <id>jqa</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.buschmais.jqassistant</groupId>
-                        <artifactId>jqassistant-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- CC: {%- endif -%} -->
-        <profile>
-            <id>ubuntu22</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <systemPropertyVariables>
-                                <de.flapdoodle.os.override>Linux|X86_64|Ubuntu|Ubuntu_22_04</de.flapdoodle.os.override>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

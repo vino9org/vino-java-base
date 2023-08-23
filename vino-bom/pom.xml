@@ -15,7 +15,7 @@
         <spring.boot.version>3.0.7</spring.boot.version>
         <spring.cloud.version>2022.0.3</spring.cloud.version>
         <netflix.dgs.version>6.0.5</netflix.dgs.version>
-        <embedded.mongo.version>4.7.0</embedded.mongo.version>
+        <embedded.mongo.version>4.7.1</embedded.mongo.version>
         <modelmapper.version>3.0.0</modelmapper.version>
         <jedis.mock.version>1.0.9</jedis.mock.version>
         <rest.assured.version>5.3.0</rest.assured.version>
@@ -64,6 +64,15 @@
                 <groupId>de.flapdoodle.embed</groupId>
                 <artifactId>de.flapdoodle.embed.mongo.spring30x</artifactId>
                 <version>${embedded.mongo.version}</version>
+            </dependency>
+            <!--
+            the following package contains latest os detection logic to handle distros that don't
+            have SSL 1.x installed. e.g. Debian 12, Ubuntu 22.04 etc
+            -->
+            <dependency>
+                <groupId>de.flapdoodle</groupId>
+                <artifactId>de.flapdoodle.os</artifactId>
+                <version>1.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.github.fppt</groupId>

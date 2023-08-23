@@ -27,7 +27,7 @@
         <jacoco.exclusion.3>**/data/model/*</jacoco.exclusion.3>
         <jacoco.minimum.line.coverage>0.7</jacoco.minimum.line.coverage>
         <spotless.verison>2.38.0</spotless.verison>
-        <jqassistant.version>2.0.5</jqassistant.version>
+        <jqassistant.version>2.0.6</jqassistant.version>
         <jqassistant.spring.version>2.0.0</jqassistant.spring.version>
         <sonar.plugin.version>3.9.1.2184</sonar.plugin.version>
         <archunit.plugin.version>3.0.0</archunit.plugin.version>
@@ -252,14 +252,15 @@
                             </goals>
                         </execution>
                     </executions>
+                    <!--
                     <dependencies>
-                        <!-- Add the Spring plugin dependency here -->
                         <dependency>
                             <groupId>org.jqassistant.plugin</groupId>
                             <artifactId>jqassistant-spring-plugin</artifactId>
                             <version>${jqassistant.spring.version}</version>
                         </dependency>
                     </dependencies>
+                    -->
                 </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
