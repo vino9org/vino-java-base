@@ -248,19 +248,9 @@
                         <execution>
                             <goals>
                                 <goal>scan</goal>
-                                <goal>analyze</goal>
                             </goals>
                         </execution>
                     </executions>
-                    <!--
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.jqassistant.plugin</groupId>
-                            <artifactId>jqassistant-spring-plugin</artifactId>
-                            <version>${jqassistant.spring.version}</version>
-                        </dependency>
-                    </dependencies>
-                    -->
                 </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
