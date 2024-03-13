@@ -15,6 +15,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup ENVs for use later
+        id: envs
+        run: |
+          echo "image=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}" >> $GITHUB_OUTPUT
+          echo "tags=develop-$(TZ=Asia/Singapore date +'%Y%m%d-%H%M%S')-$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_OUTPUT
+          if [[ "${{ github.ref }}" == "refs/heads/main" || \
+                "${{ github.ref }}" == "refs/heads/develop" ]]; then
+             echo "build_type=full" >> $GITHUB_OUTPUT
+           else
+             echo "build_type=verify" >> $GITHUB_OUTPUT
+           fi
+
       - uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -25,11 +37,13 @@ jobs:
           cache: maven
 
       - name: Build and test
-        run: mvn -B test
+        run: mvn -B verify
 
       - name: Build and deploy artifacts
-        run: mvn -B -s settings.xml deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/vino9org/vino-java-base
-        if: contains(fromJSON('["refs/heads/main", "refs/heads/master","refs/heads/develop"]'), github.ref)
+        if: if: steps.envs.outputs.build_type == 'full'
+        run: |
+          mvn -B -s settings.xml deploy \
+            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/vino9org/${{ github.event.repository.name }}
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,12 +51,13 @@ jobs:
   cleanup:
     needs: build
     runs-on: ubuntu-latest
-    if: contains(fromJSON('["refs/heads/main", "refs/heads/master","refs/heads/develop"]'), github.ref)
+    if: steps.envs.outputs.build_type == 'full'
     strategy:
       matrix:
         param: [vino-base-pom, vino-bom, vino-baselib, vino-svc-parent]
     steps:
       - uses: actions/delete-package-versions@v4
+        if: needs.build.outputs.build_type == 'full'
         with:
           owner: vino9org
           package-name: net.vino9.vino.${{ matrix.param }}
