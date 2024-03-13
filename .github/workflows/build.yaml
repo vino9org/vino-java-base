@@ -6,7 +6,9 @@ on:
       - feature/*
 
   pull_request:
-    branches: [main, develop]
+    branches:
+      - main
+      - develop
 
   workflow_dispatch:
 
