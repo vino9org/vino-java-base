@@ -64,8 +64,7 @@ jobs:
   cleanup:
     needs: build
     runs-on: ubuntu-latest
-    # delete package should only be run if the branch is main, master or develop
-    if: buiild.outputs.build_type == 'full'
+    if: build.outputs.build_type == 'full'
     strategy:
       matrix:
         param: [mbb-poc-parent-pom, mbb-bom, mbb-baselib, mbb-restapi-parent]
