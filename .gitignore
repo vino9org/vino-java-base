@@ -51,7 +51,8 @@ nb-configuration.xml
 .swagger-codegen/
 schema/out
 
-# jqassistant
-.scannerwork/
+# sonar scanner
+**/.scannerwork/*
+
 # local convenience scripts
 t

@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.vino9.vino</groupId>
         <artifactId>vino-base-pom</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7-SNAPSHOT</version>
     </parent>
 
     <artifactId>vino-baselib</artifactId>
@@ -16,7 +16,7 @@
             <dependency>
                 <groupId>net.vino9.vino</groupId>
                 <artifactId>vino-bom</artifactId>
-                <version>1.0.6</version>
+                <version>1.0.7-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -24,8 +24,6 @@
     </dependencyManagement>
 
     <properties>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.source>17</maven.compiler.source>
     </properties>
 
     <dependencies>
