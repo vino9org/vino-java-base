@@ -43,7 +43,13 @@ jobs:
 
       - name: Copy JaCoCo Report for publishing
         run: |
-          cp -r vino-baselib/target/site/jacoco coverage-reports/vino-baselib
+          if [ -d "vino-baselib/target/site/jacoco" ]; then
+            cp -r vino-baselib/target/site/jacoco coverage-reports/vino-baselib
+          fi
+
+          if [ -d "vino-demo-svc/target/site/jacoco" ]; then
+            cp -r vino-bdemo-svc/target/site/jacoco coverage-reports/vino-demo-svc
+          fi
 
       - name: Upload JaCoCo Report to GitHub Pages
         if: steps.envs.outputs.build_type == 'full'
@@ -64,6 +70,7 @@ jobs:
   cleanup:
     needs: build
     runs-on: ubuntu-latest
+    if: needs.build.outputs.build_type == 'full'
     strategy:
       matrix:
         param:
@@ -73,7 +80,6 @@ jobs:
           - vino-svc-parent
     steps:
       - id: clean-up
-        if: needs.build.outputs.build_type == 'full'
         uses: actions/delete-package-versions@v5
         with:
           owner: ${{ github.repository_owner}}

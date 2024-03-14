@@ -16,6 +16,9 @@
     <packaging>pom</packaging>
 
     <properties>
+        <java.version>17</java.version>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
         <spotless.verison>2.38.0</spotless.verison>
         <jacoco.version>0.8.10</jacoco.version>
         <jib.plugin.version>3.3.2</jib.plugin.version>
