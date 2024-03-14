@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DgsConnectionAssembler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vino-baselib</a> &gt; <a href="index.source.html" class="el_package">net.vino9.vino.base.dgs</a> &gt; <span class="el_source">DgsConnectionAssembler.java</span></div><h1>DgsConnectionAssembler.java</h1><pre class="source lang-java linenums">package net.vino9.vino.base.dgs;
+
+import graphql.relay.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Page;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class DgsConnectionAssembler {
+    // works only for forward pagination, not backward pagination
+    public static &lt;T, S&gt; Connection&lt;T&gt; fromPageable(Page&lt;S&gt; pageOfDataModels, ModelMapper mapper) {
+<span class="nc" id="L18">        var type = (new TypeToken&lt;List&lt;S&gt;&gt;() {}).getType();</span>
+<span class="nc" id="L19">        List&lt;S&gt; listOfEdges = mapper.map(pageOfDataModels.getContent(), type);</span>
+
+        // the logic of generating unique cursor id should be replaced with a better one
+<span class="nc" id="L22">        AtomicInteger index = new AtomicInteger();</span>
+<span class="nc" id="L23">        List&lt;Edge&lt;T&gt;&gt; defaultEdges =</span>
+<span class="nc" id="L24">                Stream.ofNullable(listOfEdges)</span>
+<span class="nc" id="L25">                        .flatMap(Collection::stream)</span>
+<span class="nc" id="L26">                        .map(</span>
+                                e -&gt;
+<span class="nc" id="L28">                                        (Edge&lt;T&gt;)</span>
+                                                new DefaultEdge&lt;&gt;(
+                                                        e,
+                                                        new DefaultConnectionCursor(
+<span class="nc" id="L32">                                                                String.valueOf(</span>
+<span class="nc" id="L33">                                                                        index.incrementAndGet()))))</span>
+<span class="nc" id="L34">                        .toList();</span>
+
+<span class="nc" id="L36">        var pageNumber = pageOfDataModels.getNumber();</span>
+<span class="nc" id="L37">        return new DefaultConnection&lt;&gt;(</span>
+                defaultEdges,
+                new DefaultPageInfo(
+<span class="nc" id="L40">                        new DefaultConnectionCursor(String.valueOf(pageOfDataModels.getNumber())),</span>
+                        new DefaultConnectionCursor(
+<span class="nc" id="L42">                                String.valueOf(</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                                        pageOfDataModels.hasNext() ? pageNumber + 1 : pageNumber)),</span>
+<span class="nc" id="L44">                        pageOfDataModels.hasPrevious(),</span>
+<span class="nc" id="L45">                        pageOfDataModels.hasNext()));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
