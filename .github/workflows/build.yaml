@@ -15,7 +15,20 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    outputs:
+      build_type: ${{ steps.envs.outputs.build_type }}
+
     steps:
+      - name: Setup ENVs for use later
+        id: envs
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" || \
+                "${{ github.ref }}" == "refs/heads/develop" ]]; then
+             echo "build_type=full" >> $GITHUB_OUTPUT
+           else
+             echo "build_type=verify" >> $GITHUB_OUTPUT
+           fi
+
       - uses: actions/checkout@v3
 
       - name: Set up JDK 17
@@ -26,14 +39,46 @@ jobs:
           cache: maven
 
       - name: Build and test
-        run: mvn -B test
+        run: mvn -B verify
 
       - name: Build and deploy artifacts
-        run: mvn -B -s settings.xml deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/vino9org/vino-java-base
-        if: contains(fromJSON('["refs/heads/main", "refs/heads/master","refs/heads/develop"]'), github.ref)
+        run: |
+          cp -r vino-baselib/target/site/jacoco coverage-reports/vino-baselib
+
+      - name: Deploy JaCoCo Report to GitHub Pages
+        if: steps.envs.outputs.build_type == 'full'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coverage-reports
+
+      - name: Build and deploy artifacts
+        if: steps.envs.outputs.build_type == 'full'
+        run: |
+          mvn -B -s settings.xml deploy \
+            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
         env:
-          GITHUB_USER: ${{ github.actor }}
+          GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  cleanup:
+    needs: build
+    runs-on: ubuntu-latest
+    # delete package should only be run if the branch is main, master or develop
+    if: buiild.outputs.build_type == 'full'
+    strategy:
+      matrix:
+        param: [mbb-poc-parent-pom, mbb-bom, mbb-baselib, mbb-restapi-parent]
+    steps:
+      - id: clean-up
+        if: needs.build.outputs.build_type == 'full'
+        uses: actions/delete-package-versions@v5
+        with:
+          owner: ${{ github.repository_owner}}
+          package-name: com.accenture.mbb.${{ matrix.param }}
+          package-type: maven
+          min-versions-to-keep: 10
+          token: ${{ secrets.GITHUB_TOKEN }}
 
 # TODO: cleanup older snapshots
 #      - name: Delete old packages
