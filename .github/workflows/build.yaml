@@ -48,7 +48,7 @@ jobs:
           fi
 
           if [ -d "vino-demo-svc/target/site/jacoco" ]; then
-            cp -r vino-bdemo-svc/target/site/jacoco coverage-reports/vino-demo-svc
+            cp -r vino-demo-svc/target/site/jacoco coverage-reports/vino-demo-svc
           fi
 
       - name: Upload JaCoCo Report to GitHub Pages
