@@ -18,7 +18,6 @@
     <description>Demo microservice for testing base POM</description>
 
     <properties>
-        <java.version>17</java.version>
         <graphql.codegen.package>net.vino9.vino.demo.generated</graphql.codegen.package>
         <!-- uncomment below to override default coverage ratio, 1.0 == 100% -->
         <jacoco.minimum.line.coverage>0.7</jacoco.minimum.line.coverage>

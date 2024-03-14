@@ -105,3 +105,6 @@ By default, only minimal rules are configured and each project can add rules by 
 </plugin>
 
 ```
+
+## JaCOCO Test Coverage Report
+[Test Coverage Report hosted in gh-pages](https://vino9.github.io/vino-java-base/)

@@ -6,22 +6,22 @@ on:
       - feature/*
 
   pull_request:
-    branches:
-      - main
-      - develop
+    branches: [ main ]
 
   workflow_dispatch:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
+    outputs:
+      build_type: ${{ steps.envs.outputs.build_type }}
 
     steps:
       - name: Setup ENVs for use later
         id: envs
         run: |
-          echo "image=ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}" >> $GITHUB_OUTPUT
-          echo "tags=develop-$(TZ=Asia/Singapore date +'%Y%m%d-%H%M%S')-$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_OUTPUT
           if [[ "${{ github.ref }}" == "refs/heads/main" || \
                 "${{ github.ref }}" == "refs/heads/develop" ]]; then
              echo "build_type=full" >> $GITHUB_OUTPUT
@@ -41,11 +41,28 @@ jobs:
       - name: Build and test
         run: mvn -B verify
 
+      - name: Copy JaCoCo Report for publishing
+        run: |
+          if [ -d "vino-baselib/target/site/jacoco" ]; then
+            cp -r vino-baselib/target/site/jacoco coverage-reports/vino-baselib
+          fi
+
+          if [ -d "vino-demo-svc/target/site/jacoco" ]; then
+            cp -r vino-demo-svc/target/site/jacoco coverage-reports/vino-demo-svc
+          fi
+
+      - name: Upload JaCoCo Report to GitHub Pages
+        if: steps.envs.outputs.build_type == 'full'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coverage-reports
+
       - name: Build and deploy artifacts
-        if: if: steps.envs.outputs.build_type == 'full'
+        if: steps.envs.outputs.build_type == 'full'
         run: |
           mvn -B -s settings.xml deploy \
-            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/vino9org/${{ github.event.repository.name }}
+            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,16 +70,20 @@ jobs:
   cleanup:
     needs: build
     runs-on: ubuntu-latest
-    if: steps.envs.outputs.build_type == 'full'
+    if: needs.build.outputs.build_type == 'full'
     strategy:
       matrix:
-        param: [vino-base-pom, vino-bom, vino-baselib, vino-svc-parent]
+        param:
+          - vino-base-pom
+          - vino-bom
+          - vino-baselib
+          - vino-svc-parent
     steps:
-      - uses: actions/delete-package-versions@v4
-        if: needs.build.outputs.build_type == 'full'
+      - id: clean-up
+        uses: actions/delete-package-versions@v5
         with:
-          owner: vino9org
+          owner: ${{ github.repository_owner}}
           package-name: net.vino9.vino.${{ matrix.param }}
           package-type: maven
-          min-versions-to-keep: 5
+          min-versions-to-keep: 10
           token: ${{ secrets.GITHUB_TOKEN }}
