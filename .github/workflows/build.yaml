@@ -39,7 +39,8 @@ jobs:
           cache: maven
 
       - name: Build and test
-        run: mvn -B verify
+        run: |
+          ./mvnw -Bq verify
 
       - name: Copy JaCoCo Report for publishing
         run: |
@@ -61,7 +62,7 @@ jobs:
       - name: Build and deploy artifacts
         if: steps.envs.outputs.build_type == 'full'
         run: |
-          mvn -B -s settings.xml deploy \
+          ./mvnw -B -s settings.xml deploy \
             -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
         env:
           GITHUB_USER: ${{ github.repository_owner }}
