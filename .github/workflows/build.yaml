@@ -40,7 +40,7 @@ jobs:
 
       - name: Build and test
         run: |
-          ./mvnw --batch verify
+          ./mvnw --batch-mode verify
 
       - name: Copy JaCoCo Report for publishing
         run: |
@@ -62,7 +62,7 @@ jobs:
       - name: Build and deploy artifacts
         if: steps.envs.outputs.build_type == 'full'
         run: |
-          ./mvnw --batch -s settings.xml deploy \
+          ./mvnw --batch-mode -s settings.xml deploy \
             -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
         env:
           GITHUB_USER: ${{ github.repository_owner }}
