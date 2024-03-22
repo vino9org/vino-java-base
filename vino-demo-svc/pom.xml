@@ -180,10 +180,12 @@
             </plugin>
             <!-- CC: {%- endif -%} -->
             <!-- CC: {%- if 'jqassistant' in cookiecutter.qa_tools -%} -->
+            <!-- disable temporarily to speed up test run
             <plugin>
                 <groupId>com.buschmais.jqassistant</groupId>
                 <artifactId>jqassistant-maven-plugin</artifactId>
-            </plugin>
+            </plugin> 
+            -->
             <!-- CC: {%- endif -%} -->
         </plugins>
     </build>
