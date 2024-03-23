@@ -39,7 +39,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation libs.embed.mongo.spring
     testImplementation libs.jedis.mock
-    testImplementation libs.h2database
+    testImplementation 'com.h2database:h2'
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
 }
 

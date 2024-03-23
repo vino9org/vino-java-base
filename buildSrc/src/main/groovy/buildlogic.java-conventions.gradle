@@ -2,6 +2,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'jacoco'
 }
 
 repositories {
@@ -13,6 +14,9 @@ version = '1.0.7-SNAPSHOT'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
     withSourcesJar()
 }
 
@@ -21,6 +25,19 @@ tasks.withType(JavaCompile) {
 
     // Enable the -Xlint:unchecked option
     options.compilerArgs << "-Xlint:unchecked"
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
 }
 
 publishing {
