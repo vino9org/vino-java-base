@@ -10,6 +10,7 @@ modelmapper-spring = '3.0.0'
 embed-mongo-spring = '4.11.0'
 jedis-mock = '1.0.9'
 git-properties-plugin = '2.4.1'
+spotless = '6.25.0'
 
 [libraries]
 modelmapper-spring = { module = 'org.modelmapper.extensions:modelmapper-spring', version.ref = 'modelmapper-spring' }
@@ -37,4 +38,5 @@ spring-cache-redis = ['spring-boot-starter-cache', 'spring-boot-starter-data-red
 spring-boot = { id = 'org.springframework.boot', version.ref = 'spring-boot' }
 spring-dependency-management = { id ='io.spring.dependency-management', version.ref = 'spring-dependency-management-plugin'}
 netflix-dgs-codegen = { id = 'com.netflix.dgs.codegen', version.ref = 'netflix-dgs-codegen'}
-git-properties= {   id = 'com.gorylenko.gradle-git-properties',  version.ref = 'git-properties-plugin' }
+git-properties= { id = 'com.gorylenko.gradle-git-properties',  version.ref = 'git-properties-plugin' }
+spotless = { id = 'com.diffplug.spotless', version.ref = 'spotless' }

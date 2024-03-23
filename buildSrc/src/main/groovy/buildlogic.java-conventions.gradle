@@ -3,6 +3,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'jacoco'
+    id 'com.diffplug.spotless'
 }
 
 repositories {
@@ -58,4 +59,20 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Javadoc) {
     options.encoding = 'utf-8'
+}
+
+spotless {
+    format 'misc', {
+        // define the files to apply `misc` to
+        target '*.gradle', '.gitattributes', '.gitignore'
+
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+    }
+
+    java {
+        googleJavaFormat('1.17.0').aosp().reflowLongStrings().skipJavadocFormatting()
+        formatAnnotations()
+    }
 }

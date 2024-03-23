@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.netflix.dgs.codegen)
     alias(libs.plugins.git.properties)
+    alias(libs.plugins.spotless)
 }
 
 repositories {
