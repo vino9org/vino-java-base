@@ -1,3 +1,6 @@
+# version catalog
+
+
 [versions]
 spring-boot = '3.0.7'
 spring-dependency-management-plugin = '1.1.4'
@@ -10,7 +13,6 @@ embed-mongo-spring = '4.11.0'
 jedis-mock = '1.0.9'
 
 [libraries]
-spring-boot-dependencies = { module = 'org.springframework.boot:spring-boot-dependencies', version.ref = 'spring-boot' }
 modelmapper-spring = { module = 'org.modelmapper.extensions:modelmapper-spring', version.ref = 'modelmapper-spring' }
 netflix-dgs-extended-scalars = { module = 'com.netflix.graphql.dgs:graphql-dgs-extended-scalars', version.ref = 'netflix-dgs' }
 netflix-dgs-pagination = { module = 'com.netflix.graphql.dgs:graphql-dgs-pagination', version.ref = 'netflix-dgs' }
@@ -19,6 +21,19 @@ h2database = { module = 'com.h2database:h2', version.ref = 'h2database' }
 embed-mongo-spring = { module = 'de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x', version.ref = 'embed-mongo-spring' }
 jedis-mock = { module = 'com.github.fppt:jedis-mock', version.ref = 'jedis-mock' }
 flyway-core = { module = 'org.flywaydb:flyway-core', version.ref = 'flyway-core' }
+spring-boot-starter-data-jpa = {module = 'org.springframework.boot:spring-boot-starter-data-jpa', version.ref = 'spring-boot'}
+spring-boot-starter-data-redis = {module = 'org.springframework.boot:spring-boot-starter-data-redis', version.ref = 'spring-boot'}
+spring-boot-starter-validation = {module = 'org.springframework.boot:spring-boot-starter-validation', version.ref = 'spring-boot'}
+spring-boot-starter-web = {module = 'org.springframework.boot:spring-boot-starter-web', version.ref = 'spring-boot'}
+spring-boot-starter-cache = {module = 'org.springframework.boot:spring-boot-starter-cache', version.ref = 'spring-boot'}
+
+[bundles]
+netflix-dgs = [ 'netflix-dgs-spring-boot-starter', 'netflix-dgs-extended-scalars', 'netflix-dgs-pagination']
+spring-data = [ 'spring-boot-starter-data-jpa', 'flyway-core']
+spring-basics = [ 'modelmapper-spring' ]
+spring-webmvc = [ 'spring-boot-starter-web', 'spring-boot-starter-validation' ]
+spring-cache-redis = ['spring-boot-starter-cache', 'spring-boot-starter-data-redis']
+
 
 [plugins]
 spring-boot = { id = 'org.springframework.boot', version.ref = 'spring-boot' }

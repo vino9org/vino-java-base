@@ -11,12 +11,16 @@ dependencyManagement {
 
 dependencies {
     annotationProcessor 'org.projectlombok:lombok'
+
     compileOnly 'org.projectlombok:lombok'
+
     api 'org.springframework.data:spring-data-commons'
     api libs.netflix.dgs.pagination
     api libs.modelmapper.spring
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     testAnnotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 description = 'vino-baselib'

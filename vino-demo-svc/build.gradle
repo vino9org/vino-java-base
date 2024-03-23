@@ -19,34 +19,29 @@ dependencyManagement {
 
 dependencies {
     api project(':vino-baselib')
+
     annotationProcessor 'org.projectlombok:lombok'
+
     api 'org.projectlombok:lombok'
-    api 'org.springframework.boot:spring-boot-starter-web'
-    api 'org.springframework.boot:spring-boot-starter-data-redis'
-    api 'org.springframework.boot:spring-boot-starter-cache'
+    api libs.bundles.spring.basics
+
+    api libs.bundles.spring.webmvc
+    api libs.bundles.spring.data
+    api libs.bundles.netflix.dgs
+    api libs.bundles.spring.cache.redis
     api 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    api 'org.springframework.boot:spring-boot-starter-data-jpa'
-    api 'org.springframework.boot:spring-boot-starter-validation'
-    api libs.modelmapper.spring
-    api libs.flyway.core
-    api libs.netflix.dgs.spring.boot.starter
-    api libs.netflix.dgs.extended.scalars
-    api libs.netflix.dgs.pagination
-    api 'javax.validation:validation-api:2.0.1.Final'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'org.postgresql:postgresql'
 
     testAnnotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation libs.embed.mongo.spring
     testImplementation libs.jedis.mock
     testImplementation libs.h2database
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
-
 }
-
-description = 'vino-demo-svc'
 
 generateJava {
     schemaPaths = ["${projectDir}/src/main/resources/schema/schema.graphqls"]
@@ -55,5 +50,4 @@ generateJava {
     typeMapping = ['BigDecimal': 'java.math.BigDecimal']
 }
 
-
-print "===============" + libs.spring.boot.dependencies.getClass().getName()
+description = 'vino-demo-svc'
