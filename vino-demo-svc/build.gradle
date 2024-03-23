@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.spring.dependency.management)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.netflix.dgs.codegen)
+    alias(libs.plugins.git.properties)
 }
 
 repositories {

@@ -42,7 +42,7 @@ class ActuatorTests {
         // is generated under target/classes directory
         mockMvc.perform(get("/actuator/info"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.app.name", notNullValue()));
-//                .andExpect(jsonPath("$.git.branch", notNullValue()));
+                .andExpect(jsonPath("$.app.name", notNullValue()))
+                .andExpect(jsonPath("$.git.branch", notNullValue()));
     }
 }
