@@ -1,0 +1,37 @@
+
+plugins {
+    id 'java-library'
+    //id 'io.spring.dependency-management' version '1.1.4'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+group = 'net.vino9.vino'
+version = '1.0.7-SNAPSHOT'
+java.sourceCompatibility = JavaVersion.VERSION_17
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'utf-8'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'utf-8'
+}

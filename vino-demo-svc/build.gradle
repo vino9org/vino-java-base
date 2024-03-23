@@ -1,0 +1,54 @@
+plugins {
+    id 'buildlogic.java-conventions'
+    id 'org.springframework.boot' version '3.0.7'
+    id 'io.github.kobylynskyi.graphql.codegen' version '5.10.0'
+}
+
+repositories {
+    gradlePluginPortal()
+}
+
+dependencies {
+    api project(':vino-baselib')
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    api libs.org.springframework.boot.spring.boot.starter.web
+    api libs.org.modelmapper.myextensions.modelmapper.spring
+    api libs.org.projectlombok.lombok
+    api libs.org.springframework.boot.spring.boot.starter.data.redis
+    api libs.org.springframework.boot.spring.boot.starter.cache
+    api libs.org.springframework.boot.spring.boot.starter.data.mongodb
+    api libs.org.springframework.boot.spring.boot.starter.data.jpa
+    api libs.org.springframework.boot.spring.boot.starter.validation
+    api libs.org.flywaydb.flyway.core
+    api libs.com.netflix.graphql.dgs.graphql.dgs.spring.boot.starter
+    api libs.com.netflix.graphql.dgs.graphql.dgs.extended.scalars
+    api libs.com.netflix.graphql.dgs.graphql.dgs.pagination
+    api ("javax.validation:validation-api:2.0.1.Final")
+    runtimeOnly libs.com.mysql.mysql.connector.j
+    runtimeOnly libs.org.postgresql.postgresql
+    testImplementation libs.de.flapdoodle.embed.de.flapdoodle.embed.mongo.spring30x
+    testImplementation libs.com.github.fppt.jedis.mock
+    testImplementation libs.com.h2database.h2
+    testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    testImplementation "io.rest-assured:rest-assured:5.3.0"
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+}
+
+description = 'vino-demo-svc'
+
+graphqlCodegen {
+    // all config options:
+    // https://github.com/kobylynskyi/graphql-java-codegen/blob/main/docs/codegen-options.md
+    graphqlSchemas.includePattern = "schema\\.graphqls"
+    outputDir = new File("$buildDir/generated")
+    packageName = "net.vino9.vino.demo.generated.types"
+    customTypesMapping = [
+            "CasaAccount.balance": "java.math.BigDecimal"
+    ]
+}
+
+compileJava.dependsOn 'graphqlCodegen'
+
+sourceSets.main.java.srcDir "$buildDir/generated"
