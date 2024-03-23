@@ -1,18 +1,26 @@
 plugins {
     id 'buildlogic.java-conventions'
-    id 'org.springframework.boot' version '3.0.7'
-    id 'com.netflix.dgs.codegen' version '6.0.3'
-    id 'io.spring.dependency-management' version '1.1.4'
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.netflix.dgs.codegen)
 }
 
 repositories {
     gradlePluginPortal()
 }
 
+dependencyManagement {
+    imports {
+        //mavenBom(libs.spring.boot.dependencies)
+        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:$bomNetflixDGS")
+    }
+}
+
+
 dependencies {
     api project(':vino-baselib')
     annotationProcessor 'org.projectlombok:lombok'
-    compileOnly 'org.projectlombok:lombok'
+    api 'org.projectlombok:lombok'
     api 'org.springframework.boot:spring-boot-starter-web'
     api 'org.springframework.boot:spring-boot-starter-data-redis'
     api 'org.springframework.boot:spring-boot-starter-cache'
@@ -21,19 +29,19 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-validation'
     api libs.modelmapper.spring
     api libs.flyway.core
-    api libs.netflix.graphql.dgs.spring.boot.starter
-    api libs.netflix.graphql.dgs.extended.scalars
-    api libs.netflix.graphql.dgs.pagination
+    api libs.netflix.dgs.spring.boot.starter
+    api libs.netflix.dgs.extended.scalars
+    api libs.netflix.dgs.pagination
     api 'javax.validation:validation-api:2.0.1.Final'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'org.postgresql:postgresql'
 
     testAnnotationProcessor 'org.projectlombok:lombok'
-    testImplementation libs.embed.mongo.spring30x
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation libs.embed.mongo.spring
     testImplementation libs.jedis.mock
     testImplementation libs.h2database
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
 
 }
@@ -47,7 +55,5 @@ generateJava {
     typeMapping = ['BigDecimal': 'java.math.BigDecimal']
 }
 
-//compileJava.dependsOn 'generateJava'
-//
-//print "============== ${projectDir}/build/generated/sources/dgs-codegen"
-//sourceSets.main.java.srcDir "${projectDir}/build/generated/sources/dgs-codegen"
+
+print "===============" + libs.spring.boot.dependencies.getClass().getName()

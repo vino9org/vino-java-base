@@ -1,14 +1,19 @@
 plugins {
     id 'buildlogic.java-conventions'
-    id 'org.springframework.boot' version '3.0.7'
-    id 'io.spring.dependency-management' version '1.1.4'
+    alias(libs.plugins.spring.dependency.management)
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:$bomSpringBoot")
+    }
 }
 
 dependencies {
     annotationProcessor 'org.projectlombok:lombok'
-    api 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
     api 'org.springframework.data:spring-data-commons'
-    api libs.netflix.graphql.dgs.pagination
+    api libs.netflix.dgs.pagination
     api libs.modelmapper.spring
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testAnnotationProcessor 'org.projectlombok:lombok'
