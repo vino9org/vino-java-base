@@ -9,5 +9,4 @@ pluginManagement {
 
 rootProject.name = 'vino-java-base'
 include(':vino-baselib')
-include(':vino-bom')
 include(':vino-demo-svc')
