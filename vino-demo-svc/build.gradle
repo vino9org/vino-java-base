@@ -30,6 +30,7 @@ dependencies {
     api libs.bundles.netflix.dgs
     api libs.bundles.spring.cache.redis
     api 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    api 'org.springframework.boot:spring-boot-starter-actuator'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'org.postgresql:postgresql'
@@ -40,7 +41,6 @@ dependencies {
     testImplementation libs.embed.mongo.spring
     testImplementation libs.jedis.mock
     testImplementation 'com.h2database:h2'
-    testImplementation 'io.rest-assured:rest-assured:5.3.0'
 }
 
 generateJava {
