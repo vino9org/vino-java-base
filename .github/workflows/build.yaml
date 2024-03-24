@@ -1,77 +1,71 @@
 on:
   push:
     branches:
-      - main
       - develop
+      - main
       - feature/*
 
   pull_request:
-    branches: [ main ]
+    branches:
+      - develop
+      - main
 
   workflow_dispatch:
 
 jobs:
-  build:
+  build-n-test:
 
     runs-on: ubuntu-latest
 
-    outputs:
-      build_type: ${{ steps.envs.outputs.build_type }}
-
     steps:
-      - name: Setup ENVs for use later
-        id: envs
-        run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" || \
-                "${{ github.ref }}" == "refs/heads/develop" ]]; then
-             echo "build_type=full" >> $GITHUB_OUTPUT
-           else
-             echo "build_type=verify" >> $GITHUB_OUTPUT
-           fi
-
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: maven
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@3
 
       - name: Build and test
         run: |
-          ./mvnw --batch-mode verify
+          ./gradlew -b test
 
       - name: Copy JaCoCo Report for publishing
         run: |
-          if [ -d "vino-baselib/target/site/jacoco" ]; then
-            cp -r vino-baselib/target/site/jacoco coverage-reports/vino-baselib
-          fi
-
-          if [ -d "vino-demo-svc/target/site/jacoco" ]; then
-            cp -r vino-demo-svc/target/site/jacoco coverage-reports/vino-demo-svc
-          fi
+          for module in "vino-base-lib vino-demosvc"; do
+              if [ -f "$module/build/reports/jacoco/test/index.html" ]; then
+                  rm -rf coverage-reports/$module
+                  cp -r $module/build/reports/jacoco/test coverage-reports/$module
+                  echo copied jacoco report for $module
+              else
+                  echo jacoco report not found for $module
+              fi
+          done
 
       - name: Upload JaCoCo Report to GitHub Pages
-        if: steps.envs.outputs.build_type == 'full'
+        if: startsWith(github.ref, 'refs/heads/main'))
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./coverage-reports
+        continue-on-error: true
 
       - name: Build and deploy artifacts
-        if: steps.envs.outputs.build_type == 'full'
+        if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/develop'))
         run: |
-          ./mvnw --batch-mode -s settings.xml deploy \
+          ./gradlew -b build deploy -x test\
             -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   cleanup:
-    needs: build
+    needs: build-n-test
     runs-on: ubuntu-latest
-    if: needs.build.outputs.build_type == 'full'
+    if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/develop'))
     strategy:
       matrix:
         param:
@@ -88,3 +82,4 @@ jobs:
           package-type: maven
           min-versions-to-keep: 10
           token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
