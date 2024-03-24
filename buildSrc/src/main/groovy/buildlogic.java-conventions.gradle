@@ -7,6 +7,7 @@ plugins {
 }
 
 repositories {
+    gradlePluginPortal()
     mavenCentral()
 }
 
@@ -28,17 +29,12 @@ tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:unchecked"
 }
 
-jacoco {
-    toolVersion = "0.8.11"
+tasks.withType(Javadoc) {
+    options.encoding = 'utf-8'
 }
 
-test {
-    useJUnitPlatform()
-    finalizedBy jacocoTestReport
-
-    testLogging {
-        showStandardStreams = System.getenv("CI") == "true"
-    }
+jacoco {
+    toolVersion = "0.8.11"
 }
 
 jacocoTestReport {
@@ -53,15 +49,20 @@ publishing {
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'utf-8'
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+
+    testLogging {
+        showStandardStreams = System.getenv("CI") == "true"
+    }
 }
 
-tasks.withType(Javadoc) {
-    options.encoding = 'utf-8'
-}
 
 spotless {
+    // ratchetFrom 'origin/develop'
+    enforceCheck true
+
     format 'misc', {
         // define the files to apply `misc` to
         target '*.gradle', '.gitattributes', '.gitignore'
@@ -72,6 +73,10 @@ spotless {
     }
 
     java {
+        targetExclude 'build/**/*.*'
+        toggleOffOn()
+        importOrder()
+        removeUnusedImports()
         googleJavaFormat('1.17.0').aosp().reflowLongStrings().skipJavadocFormatting()
         formatAnnotations()
     }

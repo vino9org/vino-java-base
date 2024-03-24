@@ -1,3 +1,4 @@
+// spotless:off
 package net.vino9.vino.demo;
 
 import org.springframework.boot.SpringApplication;
@@ -29,3 +30,4 @@ public class DemoServiceApplication {
         SpringApplication.run(DemoServiceApplication.class, args);
     }
 }
+// spotless:on
