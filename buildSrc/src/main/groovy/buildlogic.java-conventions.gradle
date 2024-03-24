@@ -11,8 +11,8 @@ repositories {
     mavenCentral()
 }
 
-group = $deployGroup
-version = $deployVersion
+group = "$projectMavenGroupId"
+version = "$projectMavenVersion"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
