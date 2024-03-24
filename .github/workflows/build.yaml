@@ -46,7 +46,7 @@ jobs:
           done
 
       - name: Upload JaCoCo Report to GitHub Pages
-        if: startsWith(github.ref, 'refs/heads/main')
+        if: (startsWith(github.ref, 'refs/heads/main'))
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -65,7 +65,7 @@ jobs:
   cleanup:
     needs: build-n-test
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/develop'))
+    if: (startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/develop'))
     strategy:
       matrix:
         param:
