@@ -7,10 +7,6 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-repositories {
-    gradlePluginPortal()
-}
-
 dependencyManagement {
     imports {
         //mavenBom(libs.spring.boot.dependencies)
@@ -23,10 +19,10 @@ dependencies {
     api project(':vino-baselib')
 
     annotationProcessor 'org.projectlombok:lombok'
-
     api 'org.projectlombok:lombok'
-    api libs.bundles.spring.basics
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
+    api libs.bundles.spring.basics
     api libs.bundles.spring.webmvc
     api libs.bundles.spring.data
     api libs.bundles.netflix.dgs
@@ -37,12 +33,10 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'org.postgresql:postgresql'
 
-    testAnnotationProcessor 'org.projectlombok:lombok'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2'
     testImplementation libs.embed.mongo.spring
     testImplementation libs.jedis.mock
-    testImplementation 'com.h2database:h2'
 }
 
 generateJava {
