@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and test
         run: |
-          ./gradlew -b test
+          ./gradlew test
 
       - name: Copy JaCoCo Report for publishing
         run: |
@@ -56,7 +56,7 @@ jobs:
       - name: Build and deploy artifacts
         if: (startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/develop'))
         run: |
-          ./gradlew -b build deploy -x test\
+          ./gradlew build deploy -x test\
             -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
         env:
           GITHUB_USER: ${{ github.repository_owner }}
