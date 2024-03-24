@@ -54,7 +54,7 @@ jobs:
         continue-on-error: true
 
       - name: Build and deploy artifacts
-        if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/develop'))
+        if: (startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/develop'))
         run: |
           ./gradlew -b build deploy -x test\
             -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
