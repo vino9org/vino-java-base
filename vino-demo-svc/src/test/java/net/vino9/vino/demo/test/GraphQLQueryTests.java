@@ -1,4 +1,4 @@
-package net.vino9.vino.demo;
+package net.vino9.vino.demo.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
