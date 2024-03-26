@@ -1,7 +1,6 @@
 package net.vino9.vino.demo.data.repository;
 
 import java.util.List;
-
 import net.vino9.vino.demo.data.model.CasaAccount;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

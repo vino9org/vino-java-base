@@ -33,9 +33,7 @@ class ActuatorTests {
         // thus actuator health endpoint will consider it down thus
         // mark the application as DOWN
         // we only test for livenessState until that issue is fixed
-        get("/actuator/health")
-                .then()
-                .body("components.livenessState.status", equalTo("UP"));
+        get("/actuator/health").then().body("components.livenessState.status", equalTo("UP"));
     }
 
     @Test
@@ -43,11 +41,7 @@ class ActuatorTests {
         // this test requires the maven plugin to generate correct git information
         // if the test fails in IDE, just run mvn test once to ensure the git.properties
         // is generated under target/classes directory
-        get("/actuator/info")
-                .then()
-                .body("app.name", notNullValue());
-        get("/actuator/info")
-                .then()
-                .body("git.commit", notNullValue());
+        get("/actuator/info").then().body("app.name", notNullValue());
+        get("/actuator/info").then().body("git.commit", notNullValue());
     }
 }
