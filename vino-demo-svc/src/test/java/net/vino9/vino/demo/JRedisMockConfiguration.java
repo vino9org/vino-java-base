@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -28,12 +29,13 @@ public class JRedisMockConfiguration {
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-        config.setHostName("localhost");
-        config.setPort(redisServer.getBindPort());
+        RedisStandaloneConfiguration config =
+                new RedisStandaloneConfiguration("localhost", redisServer.getBindPort());
         JedisPoolConfig poolConfig = new JedisPoolConfig();
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(config);
-        jedisConnectionFactory.setPoolConfig(poolConfig);
+        JedisClientConfiguration clientConfig =
+                JedisClientConfiguration.builder().usePooling().poolConfig(poolConfig).build();
+        JedisConnectionFactory jedisConnectionFactory =
+                new JedisConnectionFactory(config, clientConfig);
         jedisConnectionFactory.afterPropertiesSet();
         return jedisConnectionFactory;
     }
