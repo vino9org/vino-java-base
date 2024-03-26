@@ -49,7 +49,7 @@ __The modules here will use strict semantic versioning__. No SNAPSHOT versions w
 ## Notes on QA tools
 
 Maven plugins for [jQAssistant](https://jqassistant.org/), [ArchUnit](https://www.archunit.org/), [Spotless](https://github.com/diffplug/spotless/tree/main/plugin-maven)
- are configured in the [vino-svc-parent pom.xml](vino-svc-parent/pom.xml).
+are configured in the [vino-svc-parent pom.xml](vino-svc-parent/pom.xml).
 The setting can and should be customized per requirements for each project and applied uniformly on the coe base.
 
 ### Use Spotless plugin to format code
@@ -97,22 +97,22 @@ By default, only minimal rules are configured and each project can add rules by 
 
 ```xml
 <plugin>
-        <groupId>com.societegenerale.commons</groupId>
-        <artifactId>arch-unit-maven-plugin</artifactId>
-        <version>${archunit.plugin.version}</version>
-        <configuration>
-            <properties>
-                <archunit.propertyName>propertyValue</archunit.propertyName>
-            </properties>
-            <rules>
-                <!-- only minimal set rules is configured here, each project needs to set more specific rules -->
-                <preConfiguredRules>
-                    <rule>com.societegenerale.commons.plugin.rules.NoStandardStreamRuleTest</rule>
-                    <rule>com.societegenerale.commons.plugin.rules.NoPublicFieldRuleTest</rule>
-                    <rule>com.societegenerale.commons.plugin.rules.NoTestIgnoreWithoutCommentRuleTest</rule>
-                </preConfiguredRules>
-            </rules>
-        </configuration>
+		<groupId>com.societegenerale.commons</groupId>
+		<artifactId>arch-unit-maven-plugin</artifactId>
+		<version>${archunit.plugin.version}</version>
+		<configuration>
+			<properties>
+				<archunit.propertyName>propertyValue</archunit.propertyName>
+			</properties>
+			<rules>
+				<!-- only minimal set rules is configured here, each project needs to set more specific rules -->
+				<preConfiguredRules>
+					<rule>com.societegenerale.commons.plugin.rules.NoStandardStreamRuleTest</rule>
+					<rule>com.societegenerale.commons.plugin.rules.NoPublicFieldRuleTest</rule>
+					<rule>com.societegenerale.commons.plugin.rules.NoTestIgnoreWithoutCommentRuleTest</rule>
+				</preConfiguredRules>
+			</rules>
+		</configuration>
 </plugin>
 
 ```

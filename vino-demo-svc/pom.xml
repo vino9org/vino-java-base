@@ -10,10 +10,7 @@
         <relativePath>../vino-svc-parent</relativePath>
     </parent>
 
-    <!-- do not remove groupId -->
-    <groupId>net.vino9.vino</groupId>
     <artifactId>vino-demo-svc</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
     <name>vino-demo-svc</name>
     <description>Demo microservice for testing base POM</description>
 
@@ -24,27 +21,10 @@
     </properties>
 
     <dependencies>
-        <!--standard dependencies-->
-        <dependency>
-            <groupId>net.vino9.vino</groupId>
-            <artifactId>vino-baselib</artifactId>
-            <version>1.0.7-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.modelmapper.extensions</groupId>
-            <artifactId>modelmapper-spring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- end of standard dependencies -->
-
 
         <!-- CC: {% if cookiecutter.cache_type == 'redis' -%} -->
         <dependency>
@@ -109,6 +89,17 @@
         </dependency>
         <!-- CC: {%- endif -%} -->
 
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- CC: {%- if cookiecutter.database_type == 'mongodb' -%} -->
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
@@ -142,37 +133,12 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-            <!-- most of the plugin configurations are inherited from the parent pom -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>io.github.git-commit-id</groupId>
-                <artifactId>git-commit-id-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-            </plugin>
             <!-- CC: {%- if cookiecutter.api_type == 'graphql' -%} -->
             <plugin>
                 <groupId>io.github.deweyjose</groupId>
                 <artifactId>graphqlcodegen-maven-plugin</artifactId>
             </plugin>
             <!-- CC: {%- endif -%} -->
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-            </plugin>
             <!-- CC: {%- if 'archunit' in cookiecutter.qa_tools -%} -->
             <plugin>
                 <groupId>com.societegenerale.commons</groupId>
@@ -184,7 +150,7 @@
             <plugin>
                 <groupId>com.buschmais.jqassistant</groupId>
                 <artifactId>jqassistant-maven-plugin</artifactId>
-            </plugin> 
+            </plugin>
             -->
             <!-- CC: {%- endif -%} -->
         </plugins>
