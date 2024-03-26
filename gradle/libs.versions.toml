@@ -4,13 +4,14 @@
 spring-boot = '3.0.7'
 spring-dependency-management-plugin = '1.1.4'
 netflix-dgs = '6.0.5'
-netflix-dgs-codegen = '6.0.3'
+dgscodegen = '6.0.3'
 flyway-core = '9.5.1'
 modelmapper-spring = '3.0.0'
 embed-mongo-spring = '4.11.0'
 jedis-mock = '1.0.9'
 git-properties-plugin = '2.4.1'
 spotless = '6.25.0'
+jacoco = '0.8.11'
 
 [libraries]
 modelmapper-spring = { module = 'org.modelmapper.extensions:modelmapper-spring', version.ref = 'modelmapper-spring' }
@@ -37,6 +38,7 @@ spring-cache-redis = ['spring-boot-starter-cache', 'spring-boot-starter-data-red
 [plugins]
 spring-boot = { id = 'org.springframework.boot', version.ref = 'spring-boot' }
 spring-dependency-management = { id ='io.spring.dependency-management', version.ref = 'spring-dependency-management-plugin'}
-netflix-dgs-codegen = { id = 'com.netflix.dgs.codegen', version.ref = 'netflix-dgs-codegen'}
+netflix-dgs-codegen = { id = 'com.netflix.dgs.codegen', version.ref = 'dgscodegen'}
 git-properties= { id = 'com.gorylenko.gradle-git-properties',  version.ref = 'git-properties-plugin' }
 spotless = { id = 'com.diffplug.spotless', version.ref = 'spotless' }
+jacoco = { id = 'jacoco', version.ref = 'jacoco' }

@@ -10,7 +10,7 @@ plugins {
 dependencyManagement {
     imports {
         //mavenBom(libs.spring.boot.dependencies)
-        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:$bomNetflixDGS")
+        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:${libs.versions.netflix.dgs.get()}")
     }
 }
 
