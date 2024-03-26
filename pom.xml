@@ -225,10 +225,6 @@
                                 </includes>
                                 <trimTrailingWhitespace/>
                                 <endWithNewline/>
-                                <indent>
-                                    <tabs>true</tabs>
-                                    <spacesPerTab>4</spacesPerTab>
-                                </indent>
                             </format>
                         </formats>
                         <java>
@@ -237,6 +233,7 @@
                                 <style>AOSP</style>
                                 <reflowLongStrings>true</reflowLongStrings>
                             </googleJavaFormat>
+                            <formatAnnotations/>
                         </java>
                     </configuration>
                     <executions>
