@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.7</version>
+        <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -33,16 +33,16 @@
         <!-- end of language related -->
 
         <!-- build related -->
-        <jib.plugin.version>3.3.2</jib.plugin.version>
+        <jib.plugin.version>3.4.1</jib.plugin.version>
         <git.commit.plugin.version>5.0.1</git.commit.plugin.version>
-        <graphqlcodegen.plugin.version>1.38</graphqlcodegen.plugin.version>
+        <graphqlcodegen.plugin.version>1.51.3</graphqlcodegen.plugin.version>
         <!-- child pom should override this -->
         <graphql.codegen.package>my.generated</graphql.codegen.package>
         <!-- end of build related -->
 
         <!-- QA related -->
         <spotless.verison>2.38.0</spotless.verison>
-        <jacoco.version>0.8.10</jacoco.version>
+        <jacoco.version>0.8.11</jacoco.version>
 
         <!-- child pom should override this -->
         <jacoco.exclusion>**/data/model/*</jacoco.exclusion>
@@ -57,8 +57,8 @@
 
         <sonar.plugin.version>3.9.1.2184</sonar.plugin.version>
 
-        <archunit.plugin.version>3.0.0</archunit.plugin.version>
-        <archunit.build.plugin.core.version>3.0.0</archunit.build.plugin.core.version>
+        <archunit.plugin.version>3.0.2</archunit.plugin.version>
+        <archunit.build.plugin.core.version>3.1.1</archunit.build.plugin.core.version>
         <!-- end of QA related -->
 
     </properties>
@@ -71,12 +71,6 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.2</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco.version}</version>
-                </plugin>
-
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
