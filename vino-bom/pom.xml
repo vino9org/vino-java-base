@@ -14,12 +14,12 @@
     <packaging>pom</packaging>
 
     <properties>
-        <spring.boot.version>3.0.7</spring.boot.version>
-        <spring.cloud.version>2022.0.3</spring.cloud.version>
-        <netflix.dgs.version>6.0.5</netflix.dgs.version>
-        <embedded.mongo.version>4.11.0</embedded.mongo.version>
-        <modelmapper.version>3.0.0</modelmapper.version>
-        <jedis.mock.version>1.0.9</jedis.mock.version>
+        <spring.boot.version>3.2.4</spring.boot.version>
+        <spring.cloud.version>2023.0.0</spring.cloud.version>
+        <netflix.dgs.version>8.4.2</netflix.dgs.version>
+        <embedded.mongo.version>4.12.2</embedded.mongo.version>
+        <modelmapper.version>3.1.1</modelmapper.version>
+        <jedis.mock.version>1.1.0</jedis.mock.version>
     </properties>
 
     <dependencyManagement>
@@ -63,7 +63,7 @@
             </dependency>
             <dependency>
                 <groupId>de.flapdoodle.embed</groupId>
-                <artifactId>de.flapdoodle.embed.mongo.spring30x</artifactId>
+                <artifactId>de.flapdoodle.embed.mongo.spring3x</artifactId>
                 <version>${embedded.mongo.version}</version>
             </dependency>
             <dependency>

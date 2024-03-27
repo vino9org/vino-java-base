@@ -92,7 +92,7 @@
         <!-- CC: {%- if cookiecutter.database_type == 'mongodb' -%} -->
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
-            <artifactId>de.flapdoodle.embed.mongo.spring30x</artifactId>
+            <artifactId>de.flapdoodle.embed.mongo.spring3x</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- CC: {%- endif -%} -->
