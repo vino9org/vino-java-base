@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.vino9.vino</groupId>
         <artifactId>vino-base-pom</artifactId>
-        <version>1.0.7-SNAPSHOT</version>
+        <version>1.0.7</version>
     </parent>
 
     <!-- groupId and version are inherited from the parent -->

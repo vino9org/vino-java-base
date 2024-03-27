@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.vino9.vino</groupId>
         <artifactId>vino-svc-parent</artifactId>
-        <version>1.0.7-SNAPSHOT</version>
+        <version>1.0.7</version>
         <relativePath>../vino-svc-parent</relativePath>
     </parent>
 
