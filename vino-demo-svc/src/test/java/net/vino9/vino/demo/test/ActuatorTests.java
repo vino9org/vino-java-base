@@ -6,7 +6,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+// CC: {% if cookiecutter.cache_type == 'redis' -%}
 import net.vino9.vino.demo.JRedisMockConfiguration;
+// CC: {%- endif %}
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest()
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-// CC: {% if cookiecutter.cache_type != 'none' -%}
+// CC: {% if cookiecutter.cache_type == 'redis' -%}
 @Import(JRedisMockConfiguration.class)
 // CC: {%- endif %}
 class ActuatorTests {
