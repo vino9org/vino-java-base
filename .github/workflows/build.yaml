@@ -63,7 +63,7 @@ jobs:
         if: steps.envs.outputs.build_type == 'full'
         run: |
           ./mvnw --batch-mode -s settings.xml deploy \
-            -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }}
+            -DaltDeploymentRepository=github::https://maven.pkg.github.com/${{ github.repository }}
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
