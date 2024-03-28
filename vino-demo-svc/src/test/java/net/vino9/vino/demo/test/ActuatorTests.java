@@ -1,5 +1,7 @@
 package net.vino9.vino.demo.test;
 
+// mess around with import order may potentially throw off the template import in cookiecutter
+// spotless:off
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -12,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+
+// spotless:on
 
 @SpringBootTest()
 @AutoConfigureMockMvc
