@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DemoServiceApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vino-demo-svc</a> &gt; <a href="index.source.html" class="el_package">net.vino9.vino.demo</a> &gt; <span class="el_source">DemoServiceApplication.java</span></div><h1>DemoServiceApplication.java</h1><pre class="source lang-java linenums">package net.vino9.vino.demo;
 
+// spotless:off
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 // CC: {% if cookiecutter.cache_type != 'none' -%}
@@ -10,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 // CC: {% endif -%}
 // CC: {% if cookiecutter.database_type == 'mongodb' -%}
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
 // CC: {% endif -%}
+// spotless:on
 
 @SpringBootApplication
 // CC: {% if cookiecutter.database_type == 'mongodb' -%}
@@ -23,10 +24,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 // CC: {% if cookiecutter.database_type == 'postgresql' or cookiecutter.database_type == 'mysql' -%}
 @EnableJpaRepositories
 // CC: {% endif -%}
-<span class="fc" id="L26">public class DemoServiceApplication {</span>
+<span class="fc" id="L27">public class DemoServiceApplication {</span>
 
     public static void main(String[] args) {
-<span class="nc" id="L29">        SpringApplication.run(DemoServiceApplication.class, args);</span>
-<span class="nc" id="L30">    }</span>
+<span class="nc" id="L30">        SpringApplication.run(DemoServiceApplication.class, args);</span>
+<span class="nc" id="L31">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
