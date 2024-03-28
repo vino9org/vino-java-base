@@ -1,5 +1,6 @@
 package net.vino9.vino.demo;
 
+// spotless:off
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 // CC: {% if cookiecutter.cache_type != 'none' -%}
@@ -10,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 // CC: {% endif -%}
 // CC: {% if cookiecutter.database_type == 'mongodb' -%}
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
 // CC: {% endif -%}
+// spotless:on
 
 @SpringBootApplication
 // CC: {% if cookiecutter.database_type == 'mongodb' -%}
