@@ -10,9 +10,15 @@
         <relativePath>../vino-svc-parent</relativePath>
     </parent>
 
+    <!--
+        do not delete (redudant) groupId and version below.
+        doing so may throw off the template import in cookiecutter
+    -->
+    <groupId>net.vino9.vino</groupId>
     <artifactId>vino-demo-svc</artifactId>
     <name>vino-demo-svc</name>
     <description>Demo microservice for testing base POM</description>
+    <version>1.1.0</version>
 
     <properties>
         <graphql.codegen.package>net.vino9.vino.demo.generated</graphql.codegen.package>
