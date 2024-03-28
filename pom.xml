@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.vino9.vino</groupId>
     <artifactId>vino-base-pom</artifactId>
-    <version>1.0.7</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <parent>
