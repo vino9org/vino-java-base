@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.vino9.vino</groupId>
         <artifactId>vino-base-pom</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>vino-baselib</artifactId>
@@ -20,7 +20,7 @@
             <dependency>
                 <groupId>net.vino9.vino</groupId>
                 <artifactId>vino-bom</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
