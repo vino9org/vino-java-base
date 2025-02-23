@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.vino9.vino</groupId>
         <artifactId>vino-svc-parent</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.2.1</version>
         <relativePath>../vino-svc-parent</relativePath>
     </parent>
 
@@ -18,7 +18,7 @@
     <artifactId>vino-demo-svc</artifactId>
     <name>vino-demo-svc</name>
     <description>Demo microservice for testing base POM</description>
-    <version>1.2.1-SNAPSHOT</version>
+    <version>1.2.1</version>
 
     <properties>
         <graphql.codegen.package>net.vino9.vino.demo.generated</graphql.codegen.package>
